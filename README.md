@@ -69,12 +69,9 @@ We include data processing and rendering scripts under:
 
 # 📖 BibTeX
 
-    @inproceedings{yan2026posemaster,
-    title         = {PoseMaster: A Unified 3D Native Framework for Stylized Pose Generation},
-    author        = {Hongyu Yan and Kunming Luo and Weiyu Li and Kaiyi Zhang and Yixun Liang and Jingwei Huang and Chunchao Guo and Ping Tan},
-    booktitle     = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-    year          = {2026},
-    eprint        = {2506.21076},
-    archivePrefix = {arXiv},
-    primaryClass  = {cs.CV}
+    @article{yan2025posemaster,
+    title={Posemaster: Generating 3d characters in arbitrary poses from a single image},
+    author={Yan, Hongyu and Luo, Kunming and Li, Weiyu and Liang, Yixun and Li, Shengming and Huang, Jingwei and Guo, Chunchao and Tan, Ping},
+    journal={arXiv preprint arXiv:2506.21076},
+    year={2025}
     }
