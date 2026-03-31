@@ -22,7 +22,7 @@ This repository contains the codebase for **PoseMaster: A Unified 3D Native Fram
 PoseMaster unifies pose stylization and 3D generation within a cohesive 3D-native framework. Instead of using 2D skeleton images as guidance, it directly conditions on **3D skeletons** to better capture 3D spatial and topological relationships. We also build a scalable data engine to construct large-scale **Image-Skeleton-Mesh** triplets, enabling joint learning of identity preservation and geometric alignment. The strict spatial alignment between generated 3D meshes and conditioning skeletons makes PoseMaster especially suitable for generating animatable assets when combined with automated skinning models.
 
 <p align="center">
-  <img src="assets/teaser.png" width="100%"/>
+  <img src="assets/method.png" width="100%"/>
 </p>
 
 <!-- # Environment Setup
