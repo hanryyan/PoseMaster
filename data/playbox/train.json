@@ -1,0 +1,21 @@
+[
+  {
+    "0000000000001": [
+      {
+        "image": "data/example_data/playbox/0000000000001/bad_guy/frame0/PERSP_renderings0.png",
+        "skeleton": "data/example_data/playbox/0000000000001/bad_guy/frame0/bone_points.pkl",
+        "geometry": "data/example_data/playbox/0000000000001/bad_guy/frame0/geometry.npz"
+      },
+      {
+        "image": "data/example_data/playbox/0000000000001/bad_guy/frame19/PERSP_renderings0.png",
+        "skeleton": "data/example_data/playbox/0000000000001/bad_guy/frame19/bone_points.pkl",
+        "geometry": "data/example_data/playbox/0000000000001/bad_guy/frame19/geometry.npz"
+      },
+      {
+        "image": "data/example_data/playbox/0000000000001/bad_guy/frame1109/PERSP_renderings0.png",
+        "skeleton": "data/example_data/playbox/0000000000001/bad_guy/frame1109/bone_points.pkl",
+        "geometry": "data/example_data/playbox/0000000000001/bad_guy/frame1109/geometry.npz"
+      }
+    ]
+  }
+]

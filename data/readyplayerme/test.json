@@ -1,0 +1,21 @@
+[
+  {
+    "0000000000000002": [
+      {
+        "image": "data/example_data/readyplayerme/0000000000000002/Mixamo_uppercut_jab_mixamo_Motion/frame0/PERSP_renderings0.png",
+        "skeleton": "data/example_data/readyplayerme/0000000000000002/Mixamo_uppercut_jab_mixamo_Motion/frame0/bone_points.pkl",
+        "geometry": "data/example_data/readyplayerme/0000000000000002/Mixamo_uppercut_jab_mixamo_Motion/frame0/geometry.npz"
+      },
+      {
+        "image": "data/example_data/readyplayerme/0000000000000002/Mixamo_uppercut_jab_mixamo_Motion/frame7/PERSP_renderings0.png",
+        "skeleton": "data/example_data/readyplayerme/0000000000000002/Mixamo_uppercut_jab_mixamo_Motion/frame7/bone_points.pkl",
+        "geometry": "data/example_data/readyplayerme/0000000000000002/Mixamo_uppercut_jab_mixamo_Motion/frame7/geometry.npz"
+      },
+      {
+        "image": "data/example_data/readyplayerme/0000000000000002/Mixamo_uppercut_jab_mixamo_Motion/frame75/PERSP_renderings0.png",
+        "skeleton": "data/example_data/readyplayerme/0000000000000002/Mixamo_uppercut_jab_mixamo_Motion/frame75/bone_points.pkl",
+        "geometry": "data/example_data/readyplayerme/0000000000000002/Mixamo_uppercut_jab_mixamo_Motion/frame75/geometry.npz"
+      }
+    ]
+  }
+]

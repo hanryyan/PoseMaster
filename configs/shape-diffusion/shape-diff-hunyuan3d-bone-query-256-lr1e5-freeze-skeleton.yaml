@@ -1,0 +1,170 @@
+exp_root_dir: "outputs/image-skeleton-to-shape-diffusion"
+name: "hunyuan3d-bone-query-256-lr1e5-freeze-skeleton"
+tag: "${rmspace:${system.shape_model_type}+n${data.n_samples}+pfeat${system.shape_model.point_feats}+lr${system.optimizer.args.lr},_}"
+seed: 0
+# resume: ./outputs/image-skeleton-to-shape-diffusion/ablation-mmdit-combine-image-dino-large-skeleton-bone-sa-lr1e4-double_seperate_discard-aug/michelangelo-autoencoder+n49512+pfeat3+lr0.0001/ckpts/last.ckpt
+
+data_type: "Character-direction-datamodule"
+data:
+  root_dir: ["data/vroid","data/playbox","data/readyplayerme"]
+  geo_data_type: "sdf"
+  sampling_strategy: null
+  n_samples: 81920
+  
+  load_skeleton: True
+  num_bone_points: 256
+  bone_point_interval: 0.005
+  data_aug_prob: 0.15
+  load_geometry: True
+  load_supervision: False
+
+  load_image: true              
+  random_rotate: true
+  random_color_jitter: true
+  image_size: 518
+  background_color: [255,255,255]
+  n_views: 1
+
+  batch_size: 1
+  num_workers: 16
+
+system_type: "hunyuan3d-flow-system"
+system:
+  z_scale_factor: 1.0079887561230991
+  cfg_type: "freeze_skeleton"
+  num_inference_steps: 50
+  eta: 0.0
+  extract_mesh_func: mc
+  vis_training: false
+  remove_bg: False
+  resize_img: True
+  background_color: [255, 255, 255]
+  visualize_mesh: false
+  compute_metric: false
+  octree_depth: 8
+  num_bone_points: ${data.num_bone_points}
+
+  shape_model_type: hunyuan3d-autoencoder
+  shape_model:
+    pretrained_model_name_or_path: "ckpts/posemaster_vae.ckpt"
+    num_latents: 4096
+    train_num_latents_range: [4096]
+    train_num_latents_probs: [1.0]
+    downsample_ratio: 20
+    embed_dim: 64
+    point_feats: 3
+    sharpedge_label: true
+    pc_size: 81920
+    pc_sharpedge_size: 0
+    num_freqs: 8
+    include_pi: false
+    heads: 16
+    width: 1024
+    num_encoder_layers: 8
+    num_decoder_layers: 16
+    use_ln_post: true
+    init_scale: 0.25
+    qkv_bias: false
+    flash: true
+    qk_norm: true
+    use_checkpoint: false
+
+  condition_model_type: "dinov2-bone-point-embedder"
+  condition_model:
+    pretrained_model_name_or_path: ckpts/posemaster_cond.ckpt
+    pretrained_dino_name_or_path: ckpts/dinov2-large
+    empty_embeds_ratio: 0.1
+    image_size_dino: 518
+    num_freqs: 8
+    include_pi: false
+
+  denoiser_model_type: "hunyuan3d-denoiser"
+  denoiser_model:
+    pretrained_model_name_or_path: "ckpts/posemaster_dit.ckpt"
+    input_size: 4096
+    in_channels: 64
+    hidden_size: 2048
+    context_dim: 1024
+    depth: 21
+    num_heads: 16
+    qk_norm: true
+    text_len: 1370
+    with_decoupled_ca: false
+    use_attention_pooling: false
+    qk_norm_type: 'rms'
+    qkv_bias: false
+    use_pos_emb: false
+    num_moe_layers: 6
+    num_experts: 8
+    moe_top_k: 2
+
+  scheduler_cfg:
+    transport:
+      target: posemaster.systems.transport.create_transport
+      params:
+        path_type: Linear
+        prediction: velocity
+        train_sample_type: logit_normal #for better diffusion performance, remember to turn it off after dinog is converging
+        mean: 0 
+        std: 1.0
+        shift_scale: 0.125 # it should be 0.125 4096/512
+    sampler:
+      target: posemaster.systems.transport.Sampler
+      params: {}
+      ode_params:
+        sampling_method: euler # dopri5 ...
+        num_steps: &num_steps 50
+
+  noise_scheduler_type: "diffusers.schedulers.FlowMatchEulerDiscreteScheduler"
+  noise_scheduler:
+    num_train_timesteps: 1000
+    shift: 3.0
+    
+  denoise_scheduler_type: "diffusers.schedulers.FlowMatchEulerDiscreteScheduler"
+  denoise_scheduler:
+    num_train_timesteps: 1000
+    shift: 3.0
+
+  loggers:
+    wandb:
+      enable: false
+      project: "PoseMaster"
+      name: image-to-shape-diffusion+${name}+${tag}
+
+  loss:
+    loss_type: "mse"
+    lambda_diffusion: 1.
+
+  optimizer:
+    name: AdamW
+    args:
+      lr: 1.e-5
+      betas: [0.9, 0.99]
+      eps: 1.e-6
+
+  scheduler:
+    name: CosineAnnealingLR
+    interval: step
+    args:
+      T_max: 10000
+      eta_min: 1.e-6
+
+trainer:
+  num_nodes: 1
+  max_epochs: 50
+  log_every_n_steps: 5
+  num_sanity_val_steps: 0
+  check_val_every_n_epoch: 1
+  # val_check_interval: 5000
+  enable_progress_bar: true
+  # limit_val_batches: 2
+  gradient_clip_val: 1.0
+  gradient_clip_algorithm: "norm"
+  precision: bf16-mixed
+  strategy: 'deepspeed'
+  # accumulate_grad_batches: 5
+
+checkpoint:
+  save_last: true
+  save_top_k: -1
+  every_n_train_steps: 5000

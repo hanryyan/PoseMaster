@@ -1,0 +1,21 @@
+[
+  {
+    "0000000000000": [
+      {
+        "image": "data/example_data/vroid/0000000000000/Mixamo_walk_with_rifle_mixamo_Motion/frame0/PERSP_renderings0.png",
+        "skeleton": "data/example_data/vroid/0000000000000/Mixamo_walk_with_rifle_mixamo_Motion/frame0/bone_points.pkl",
+        "geometry": "data/example_data/vroid/0000000000000/Mixamo_walk_with_rifle_mixamo_Motion/frame0/geometry.npz"
+      },
+      {
+        "image": "data/example_data/vroid/0000000000000/Mixamo_walk_with_rifle_mixamo_Motion/frame12/PERSP_renderings0.png",
+        "skeleton": "data/example_data/vroid/0000000000000/Mixamo_walk_with_rifle_mixamo_Motion/frame12/bone_points.pkl",
+        "geometry": "data/example_data/vroid/0000000000000/Mixamo_walk_with_rifle_mixamo_Motion/frame12/geometry.npz"
+      },
+      {
+        "image": "data/example_data/vroid/0000000000000/Mixamo_walk_with_rifle_mixamo_Motion/frame119/PERSP_renderings0.png",
+        "skeleton": "data/example_data/vroid/0000000000000/Mixamo_walk_with_rifle_mixamo_Motion/frame119/bone_points.pkl",
+        "geometry": "data/example_data/vroid/0000000000000/Mixamo_walk_with_rifle_mixamo_Motion/frame119/geometry.npz"
+      }
+    ]
+  }
+]

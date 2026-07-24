@@ -1,0 +1,14 @@
+*.pyc
+*.idea
+*.pytest
+*.egg-info
+dist
+build
+__pycache__
+.idea
+.vscode
+ckpts
+outputs
+cvpr_experiments
+data_processing
+runner
