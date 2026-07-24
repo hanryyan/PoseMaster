@@ -58,18 +58,13 @@ class PoseMasterPipeline():
         # 1. Download the checkpoints and configs
         # use snapshot download here to get it working from from_pretrained
         if repo_id is not None:
-            ckpt_path = hf_hub_download(repo_id=repo_id, filename="model.ckpt", repo_type="model")
-            config_path = hf_hub_download(repo_id=repo_id, filename="config.yaml", repo_type="model")
+            ckpt_path = hf_hub_download(repo_id=repo_id, filename="posemaster_dit.ckpt", repo_type="model")
+            config_path = hf_hub_download(repo_id=repo_id, filename="shape-diff-hunyuan3d-flow-freeze-skeleton.yaml", repo_type="model")
 
         # 2. Load the model
-        # device = kwargs.get("device", "cuda" if torch.cuda.is_available() else "cpu")
         cfg = load_config(config_path)
         system = posemaster.find(cfg.system_type)(cfg.system)
         print(f"Restoring states from the checkpoint path at {ckpt_path} with config {cfg}")
-        # ckpt = torch.load(ckpt_path, map_location=torch.device('cpu'))
-        # system.load_state_dict(
-        #     ckpt["state_dict"] if "state_dict" in ckpt else ckpt,
-        # )
         system = system.to(device).eval()
 
         system.shape_model = system.shape_model.to(dtype)

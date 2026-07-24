@@ -1,5 +1,5 @@
 exp_root_dir: "outputs/image-skeleton-to-shape-diffusion"
-name: "hunyuan3d-bone-query-256-lr1e5-freeze-skeleton"
+name: "shape-diff-hunyuan3d-flow-freeze-skeleton"
 tag: "${rmspace:${system.shape_model_type}+n${data.n_samples}+pfeat${system.shape_model.point_feats}+lr${system.optimizer.args.lr},_}"
 seed: 0
 # resume: ./outputs/image-skeleton-to-shape-diffusion/ablation-mmdit-combine-image-dino-large-skeleton-bone-sa-lr1e4-double_seperate_discard-aug/michelangelo-autoencoder+n49512+pfeat3+lr0.0001/ckpts/last.ckpt
